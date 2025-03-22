@@ -1,9 +1,3 @@
-# Copyright 2021 ETH Zurich and University of Bologna.
-# Licensed under the Apache License, Version 2.0, see https://www.apache.org/licenses/LICENSE-2.0 for details.
-# SPDX-License-Identifier: Apache-2.0
-#
-# Author: Viviane Potocnik <vivianep@iis.ee.ethz.ch> (ETH Zurich) 
-
 import matplotlib.pyplot as plt
 import numpy as np
 import serial
