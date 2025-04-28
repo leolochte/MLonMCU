@@ -1,5 +1,13 @@
 # Machine Learning on Microcontrollers @ ETH Zurich
 
+This repository contains a collection of programming exercises (`ex1`–`ex8`) and their corresponding solutions (`sol1`–`sol8`).  
+Each exercise is structured to progressively build skills and understanding in deploying ML models on edge devices.
+
+## Notes
+
+Exercises and solutions may continue to be updated based on corrections or improvements.
+Feel free to open issues if you find any bugs or inconsistencies!
+
 ## Contributing
 
 We welcome contributions to this project! If you would like to contribute, follow these steps:
