@@ -1,11 +1,79 @@
 # Machine Learning on Microcontrollers @ ETH Zurich
 
-This repository contains a collection of programming exercises (`ex1`–`ex8`) and their corresponding solutions (`sol1`–`sol8`).  
-Each exercise is structured to progressively build skills and understanding in deploying ML models on edge devices.
+This repository contains a comprehensive collection of hands-on exercises for learning machine learning deployment on microcontrollers and edge devices. The course progresses from basic embedded programming to advanced ML optimization techniques.
+
+## Repository Structure
+
+Each exercise (`ex1`–`ex8`) contains:
+- **`task/`** - Exercise materials, starter code, and instructions
+- **`solution/`** - Reference solutions and implementation guides
+
+## Exercises Overview
+
+### Exercise 1: Introduction to Embedded Systems
+- **Focus**: Basic microcontroller programming and GPIO operations
+- **Files**: Basic blinky LED example and setup
+
+### Exercise 2: Audio Processing Fundamentals  
+- **Focus**: Digital signal processing and audio analysis
+- **Files**: Audio processing with MLonMCU framework, Jupyter notebook tutorials
+
+### Exercise 3: Machine Learning Pipelines
+- **Focus**: End-to-end ML workflow implementation
+- **Files**: Multiple Jupyter notebooks covering data preprocessing, training, and evaluation
+
+### Exercise 4: Real-time Audio Analysis
+- **Focus**: FFT profiling and real-time signal processing
+- **Files**: ADF implementation, FFT profiling tools, audio playback utilities
+
+### Exercise 5: MFCC Feature Extraction
+- **Focus**: Mel-frequency cepstral coefficients for audio ML
+- **Files**: MFCC training notebooks, TensorFlow Lite model conversion, STM32 deployment
+
+### Exercise 6: Model Optimization and Quantization
+- **Focus**: Neural network compression techniques
+- **Files**: Fashion-MNIST models with various optimization strategies (pruning, quantization, QAT)
+
+### Exercise 7: Knowledge Distillation
+- **Focus**: Model compression through teacher-student learning
+- **Files**: Knowledge distillation implementation, live inference demo, STM32 deployment packages
+
+### Exercise 8: Computer Vision on Edge
+- **Focus**: CNN deployment for image classification
+- **Files**: Camera integration, AI8X framework, meme classification models
+
+## Getting Started
+
+1. **Prerequisites**: 
+   - STM32 development environment
+   - Python 3.8+ with TensorFlow/PyTorch
+   - Jupyter Notebook
+
+2. **Setup**:
+   ```bash
+   git clone <repository-url>
+   cd MLonMCU
+   # Install requirements for each exercise as needed
+   ```
+
+3. **Working with Exercises**:
+   - Start with the PDF instructions in each `task/` directory
+   - Follow the progressive difficulty from ex1 to ex8
+   - Reference solutions are available in each `solution/` directory
+
+## Learning Objectives
+
+By completing these exercises, you will learn:
+- Embedded systems programming for ML applications
+- Audio signal processing and feature extraction
+- Neural network optimization for resource-constrained devices
+- Model quantization and compression techniques
+- Real-time inference on microcontrollers
+- Computer vision pipeline deployment
 
 ## Notes
 
-Exercises and solutions may continue to be updated based on corrections or improvements.
+Exercises and solutions are continuously updated based on feedback and improvements.
 Feel free to open issues if you find any bugs or inconsistencies!
 
 ## Contributing
