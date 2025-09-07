@@ -1,6 +1,9 @@
+"""
+Please run this script outside the Docker container, as it requires access to the host's audio hardware.
+"""
+
 import sounddevice as sd
 import numpy as np
-import keyboard  # pip install keyboard
 import wave
 
 # ================== CONFIG ==================
@@ -11,8 +14,8 @@ OUTPUT_FILE = 'recording.wav'
 # ============================================
 
 def main():
-    print(f"Press SPACE to start recording {DURATION} seconds of audio...")
-    keyboard.wait('space')
+    print(f"Press ENTER to start recording {DURATION} seconds of audio...")
+    _ = input()
     print("Recording...")
 
     recording = sd.rec(int(DURATION * SAMPLE_RATE), samplerate=SAMPLE_RATE, channels=CHANNELS, dtype='float32')

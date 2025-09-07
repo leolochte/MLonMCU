@@ -11,7 +11,7 @@ Each exercise (`ex1`–`ex8`) contains:
 ## Exercises Overview
 
 ### Exercise 1: Introduction to Embedded Systems
-- **Focus**: Basic microcontroller programming and GPIO operations
+- **Focus**: Environment setup, basic microcontroller programming and GPIO operations
 - **Files**: Basic blinky LED example and setup
 
 ### Exercise 2: Audio Processing Fundamentals  
@@ -45,6 +45,7 @@ Each exercise (`ex1`–`ex8`) contains:
 ## Getting Started
 
 1. **Prerequisites**: 
+   - Docker
    - STM32 development environment
    - Python 3.8+ with TensorFlow/PyTorch
    - Jupyter Notebook
@@ -52,7 +53,8 @@ Each exercise (`ex1`–`ex8`) contains:
 2. **Setup**:
    ```bash
    git clone <repository-url>
-   cd MLonMCU
+   cd MLonMCU/dockerfiles
+   # Please follow the README.md file in MLonMCU/dockerfiles
    # Install requirements for each exercise as needed
    ```
 
