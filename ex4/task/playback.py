@@ -2,39 +2,74 @@
 Please run this script outside the Docker container, as it requires access to the host's audio hardware.
 """
 
-import sounddevice as sd
+import serial
+import struct
+import time
+import matplotlib.pyplot as plt
 import numpy as np
-import wave
+import sounddevice as sd
 
-# ================== CONFIG ==================
-DURATION = 5       # seconds to record
-SAMPLE_RATE = 44100  # Hz
-CHANNELS = 1       # Mono
-OUTPUT_FILE = 'recording.wav'
-# ============================================
+# ----------------- Configuration -----------------
+PORT = 'COM3'          # Change to your UART port
+BAUDRATE = 921600      # Match your MCU UART baudrate
+SYNC_WORD = 0xAA55     # Must match your MCU SYNC_WORD
+RECORD_SECONDS = 5
 
-def main():
-    print(f"Press ENTER to start recording {DURATION} seconds of audio...")
-    _ = input()
-    print("Recording...")
+# ----------------- Open serial -----------------
+ser = serial.Serial(PORT, BAUDRATE, timeout=0.1)
+print(f"Opened {PORT} at {BAUDRATE} baud")
 
-    recording = sd.rec(int(DURATION * SAMPLE_RATE), samplerate=SAMPLE_RATE, channels=CHANNELS, dtype='float32')
-    sd.wait()  # Wait until recording is finished
+start_time = time.time()
+data_bytes = bytearray()
 
-    print("Recording finished. Playing back...")
-    sd.play(recording, samplerate=SAMPLE_RATE)
-    sd.wait()
+# ----------------- Record for 5 seconds -----------------
+print(f"Recording {RECORD_SECONDS} seconds...")
+while time.time() - start_time < RECORD_SECONDS:
+    chunk = ser.read(1024)
+    if chunk:
+        data_bytes.extend(chunk)
 
-    # Save to WAV
-    print(f"Saving recording to {OUTPUT_FILE}...")
-    recording_int16 = np.int16(recording * 32767)  # Convert to int16
-    with wave.open(OUTPUT_FILE, 'w') as wf:
-        wf.setnchannels(CHANNELS)
-        wf.setsampwidth(2)  # 16-bit
-        wf.setframerate(SAMPLE_RATE)
-        wf.writeframes(recording_int16.tobytes())
+ser.close()
+print(f"Recording done, {len(data_bytes)} bytes received")
 
-    print("Playback and save finished.")
+# ----------------- Extract samples -----------------
+samples = []
+i = 0
+while i < len(data_bytes) - 2:
+    # Check for sync word
+    sync = struct.unpack_from('<H', data_bytes, i)[0]  # little-endian
+    if sync == SYNC_WORD:
+        i += 2
+        # Extract following 16-bit samples until next sync word
+        while i < len(data_bytes) - 1:
+            next_sync = struct.unpack_from('<H', data_bytes, i)[0]
+            if next_sync == SYNC_WORD:
+                break
+            sample = struct.unpack_from('<h', data_bytes, i)[0]  # signed 16-bit
+            samples.append(sample)
+            i += 2
+    else:
+        i += 1  # Move forward to find sync word
 
-if __name__ == "__main__":
-    main()
+samples = np.array(samples, dtype=np.int16)
+num_samples = len(samples)
+actual_time = RECORD_SECONDS  # measured time
+sample_rate = num_samples / actual_time
+
+print("Playing back audio...")
+sd.play(samples, samplerate=int(sample_rate))
+sd.wait()  # Wait until playback finishes
+print("Playback finished")
+
+print(f"Received {num_samples} samples in {actual_time:.2f} seconds")
+print(f"Approximate sample rate: {sample_rate:.2f} Hz")
+
+# ----------------- Plot audio -----------------
+plt.figure(figsize=(12,4))
+plt.plot(samples, label='Audio samples')
+plt.xlabel('Sample index')
+plt.ylabel('Amplitude')
+plt.title('UART PCM Audio')
+plt.grid(True)
+plt.legend()
+plt.show()
