@@ -1,3 +1,8 @@
+"""
+Please run this script outside the Docker container, as it requires access to the host's communication peripheral.
+"""
+
+
 import cv2
 import serial
 import threading

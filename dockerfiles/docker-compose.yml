@@ -1,0 +1,16 @@
+services:
+  tf-notebook:
+    build:
+      context: .
+      args:
+        NB_USER: "mlonmcu_env" # change if you want another username in the container
+        NB_UID: "${UID:-1000}"
+    image: tf-notebook:cpu
+    container_name: tf-notebook
+    environment:
+      - TZ=Europe/Zurich
+    ports:
+      - "8888:8888" # Jupyter Lab on localhost:8888
+    volumes:
+      - ./workspace:/workspace # your notebooks live here
+    restart: unless-stopped

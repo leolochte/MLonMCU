@@ -1,3 +1,7 @@
+"""
+Please run this script outside the Docker container, as it requires access to the host's communication peripheral.
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 import serial

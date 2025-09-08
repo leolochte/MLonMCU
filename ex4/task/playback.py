@@ -1,3 +1,7 @@
+"""
+Please run this script outside the Docker container, as it requires access to the host's audio hardware.
+"""
+
 import serial
 import struct
 import time
