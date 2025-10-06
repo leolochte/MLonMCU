@@ -14,8 +14,8 @@ Each exercise (`ex1`–`ex8`) contains:
 - **Focus**: Environment setup, basic microcontroller programming and GPIO operations
 - **Files**: Basic blinky LED example and setup
 
-### Exercise 2: Audio Processing Fundamentals  
-- **Focus**: Digital signal processing and audio analysis
+### Exercise 2: Good Practices for Training ML models  
+- **Focus**: Introduction to ML model training along with digital signal processing and audio analysis fundamentals.
 - **Files**: Audio processing with MLonMCU framework, Jupyter notebook tutorials
 
 ### Exercise 3: Machine Learning Pipelines
